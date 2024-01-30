@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PokeDex</title>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Moul&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/dist/output.css">
+
+</head>
+
+<body class="bg-main bg-no-repeat bg-cover bg-center bg-fixed">
+
+    <h1 class="my-12 text-center text-8xl text-white textShadow"> PokéDex</h1>
+
+    <div class="flex justify-center w-10/12 text-xl">
+
+        <input class="w-4/12 border-black border-4 text-center" type="text" placeholder="Pokemon name/number">
+
+        <button type="button"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-16 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 mx-3">Search</button>
+
+
+        <button type="button"
+            class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg  px-16 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800 mx-3">Random</button>
+
+            <button type="button" class="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg  px-16 py-2.5 text-center " data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example" data-drawer-placement="right" aria-controls="drawer-right-example">Favorite</button>
+
+ 
+ <!-- drawer component -->
+ <div id="drawer-right-example" class="fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-white w-[25vw] dark:bg-gray-800" tabindex="-1" aria-labelledby="drawer-right-label">
+     <h5 id="drawer-right-label" class="inline-flex items-center mb-4 font-semibold text-4xl  text-black dark:text-gray-400"> 
+
+     <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+   </svg>Favorites</h5>
+    <button type="button" data-drawer-hide="drawer-right-example" aria-controls="drawer-right-example" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white" >
+       <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+       </svg>
+       <span class="sr-only">Close menu</span>
+    </button>
+    
+
+<h1>hi im a placeholder 1</h1>
+<h1>hi im a placeholder 2</h1>
+<h1>hi im a placeholder 3</h1>
+<h1>hi im a placeholder 4</h1>
+
+    
+ </div>
+
+ 
+
+
+ 
+
+
+
+
+
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 mt-20">
+        <div class="">
+
+            <div class="flex justify-center items-center">
+
+                <p class="text-white text-5xl textShadow">#1 Bulbasaur</p>
+
+                <button id="shinyBtn" type="button"
+                    class="text-white bg-gradient-to-r from-yellow-200 via-orange-400 to-yellow-300 hover:bg-gradient-to-bl focus:ring-4 rounded-lg text-xl px-16 py-2.5 mx-3">Shiny</button>
+                <img src="/assets/Star_Vector.png" alt="">
+            </div>
+
+            <div class="flex justify-center items-center">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
+                    alt="">
+            </div>
+
+            <p class="text-white text-5xl textShadow text-center">Evolutions</p>
+
+            <div class="flex justify-center items-end gap-[3vw] mt-6">
+
+
+                <img class="evoImg"
+                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/1.gif"
+                    alt="">
+                <img class="evoImg"
+                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/2.gif"
+                    alt="">
+                <img class="evoImg"
+                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/3.gif"
+                    alt="">
+            </div>
+
+
+        </div>
+        <div class="">
+        
+                <div class="flex w-full textShadow">
+                    <p class=" w-[25%] text-3xl ">Type:</p>
+                    <p class=" w-[75%] text-3xl ">Grass, Poison</p>
+                </div>
+                <div class="flex w-full textShadow my-10 ">
+                    <p class=" w-[25%] text-3xl break-words">Description: </p>
+                    <p class=" w-[75%] text-3xl">A strange seed was planted on its back at birth. The plant sprouts and grows with this POKeMON</p>
+                </div>
+                <div class="flex w-full textShadow my-10">
+                    <p class=" w-[25%] text-3xl break-words
+                    ">Location:</p>
+                    <p class=" w-[75%] text-3xl ">Pallet Town</p>
+                </div>
+                <div class="flex w-full textShadow my-10">
+                    <p class=" w-[25%] text-3xl break-words
+                    ">Abilities:</p>
+                    <p class=" w-[75%] text-3xl ">Overgrowth, Chlorophyll</p>
+                </div>
+                <div class="flex w-full textShadow my-10">
+                    <p class=" w-[25%] text-3xl break-words
+                    ">Moves:</p>
+                    <p class=" w-[75%] text-3xl ">Razor Wind, Swords Dance, Cut, Bind, Vine Whip, Headbutt,
+                        Tackle, Body Slam, Take Down, Double Edge, Growl, Strength, Mega-Drain, Leech Seed, Growth,
+                        Razor Leaf, Solar Beam, Poison Powder, Sleep Powder, Petal Dance, String Shot, Toxic, Rage,
+                        Mimic Double Team, Defense Curl, Light Screen</p>
+                </div>
+
+            
+            
+
+        
+
+    </div>
+
+
+
+
+
+
+
+    <script src="/scripts/app.js"></script>
+    <script src="/node_modules/flowbite/dist/flowbite.min.js"></script>
+</body>
+
+</html>
