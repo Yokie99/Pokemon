@@ -20,7 +20,7 @@
 
     <div class="flex justify-center w-10/12 text-xl">
 
-        <input class="w-4/12 border-black border-4 text-center" type="text" placeholder="Pokemon name/number">
+        <input id="pkmnInput" class="w-4/12 border-black border-4 text-center" type="text" placeholder="Pokemon name/number">
 
         <button type="button"
             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-16 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 mx-3">Search</button>
@@ -70,7 +70,7 @@
 
             <div class="flex justify-center items-center">
 
-                <p class="text-white text-5xl textShadow">#1 Bulbasaur</p>
+                <p id="monName" class="text-white text-5xl textShadow">#1 Bulbasaur</p>
 
                 <button id="shinyBtn" type="button"
                     class="text-white bg-gradient-to-r from-yellow-200 via-orange-400 to-yellow-300 hover:bg-gradient-to-bl focus:ring-4 rounded-lg text-xl px-16 py-2.5 mx-3">Shiny</button>
@@ -78,7 +78,7 @@
             </div>
 
             <div class="flex justify-center items-center">
-                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
+                <img id="monImg" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
                     alt="">
             </div>
 
@@ -104,26 +104,26 @@
         
                 <div class="flex w-full textShadow">
                     <p class=" w-[25%] text-3xl ">Type:</p>
-                    <p class=" w-[75%] text-3xl ">Grass, Poison</p>
+                    <p id="monType" class=" w-[75%] text-3xl ">Grass, Poison</p>
                 </div>
                 <div class="flex w-full textShadow my-10 ">
                     <p class=" w-[25%] text-3xl break-words">Description: </p>
-                    <p class=" w-[75%] text-3xl">A strange seed was planted on its back at birth. The plant sprouts and grows with this POKeMON</p>
+                    <p id="monDesc" class=" w-[75%] text-3xl">A strange seed was planted on its back at birth. The plant sprouts and grows with this POKeMON</p>
                 </div>
                 <div class="flex w-full textShadow my-10">
                     <p class=" w-[25%] text-3xl break-words
                     ">Location:</p>
-                    <p class=" w-[75%] text-3xl ">Pallet Town</p>
+                    <p id="monLocation" class=" w-[75%] text-3xl ">Pallet Town</p>
                 </div>
                 <div class="flex w-full textShadow my-10">
                     <p class=" w-[25%] text-3xl break-words
                     ">Abilities:</p>
-                    <p class=" w-[75%] text-3xl ">Overgrowth, Chlorophyll</p>
+                    <p id="monAbilities" class=" w-[75%] text-3xl ">Overgrowth, Chlorophyll</p>
                 </div>
                 <div class="flex w-full textShadow my-10">
                     <p class=" w-[25%] text-3xl break-words
                     ">Moves:</p>
-                    <p class=" w-[75%] text-3xl ">Razor Wind, Swords Dance, Cut, Bind, Vine Whip, Headbutt,
+                    <p id="monMoves" class=" w-[75%] text-3xl ">Razor Wind, Swords Dance, Cut, Bind, Vine Whip, Headbutt,
                         Tackle, Body Slam, Take Down, Double Edge, Growl, Strength, Mega-Drain, Leech Seed, Growth,
                         Razor Leaf, Solar Beam, Poison Powder, Sleep Powder, Petal Dance, String Shot, Toxic, Rage,
                         Mimic Double Team, Defense Curl, Light Screen</p>
