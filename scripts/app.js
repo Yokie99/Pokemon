@@ -7,10 +7,17 @@ let monAbilities = document.getElementById("monAbilities");
 let monMoves = document.getElementById("monMoves");
 let monImg = document.getElementById("monImg");
 
-
+let evoDiv = document.getElementById("evoDiv");
+let evoDiv2 = document.getElementById("evoDiv2");
+let evoDiv3 = document.getElementById("evoDiv3");
+let evoCount = 0;
 
 
 const mainApi = async (mon) => {
+    evoDiv.textContent = "";
+    evoDiv2.textContent = "";
+    evoDiv3.textContent = "";
+    evoCount = 0;
     const promise = await fetch("https://pokeapi.co/api/v2/pokemon/" + mon);
     const data = await promise.json();
 
@@ -46,8 +53,14 @@ const locationFetch = async (data) =>{
 const speciesFetch = async (data) => {
     const promise = await fetch([data.species.url]);
     const species = await promise.json();
-    monDesc.textContent = species.flavor_text_entries[0].flavor_text;
-    console.log(species);
+    for(let i =0; i<species.flavor_text_entries.length; i++){
+        if (species.flavor_text_entries[i].language.name == "en"){
+            monDesc.textContent = species.flavor_text_entries[i].flavor_text;
+            break;
+        }
+    }
+    
+    console.log(species.flavor_text_entries.length);
     evoFetch(species);
 }
 
@@ -56,11 +69,56 @@ const evoFetch = async (data) =>{
         const promise = await fetch([data.evolution_chain.url]);
         const evo = await promise.json();
         console.log(evo);
-        if (evo.chain.evolves_to[0]){
-            console.log(evo.chain.evolves_to.length);
+
+        let evoArr = [];
+        
+        let evolves = evo.chain.evolves_to;
+        for (let i = 1; i < evolves.length; i++) {
+            let evo1 = "";
+            evo1 = [evo.chain.species.name, evolves[i].species.name];
+            // evoArr.push(evolves[i].species.name);
+            let evolves2 = evolves[i].evolves_to;
+
+            if (evolves2.length >= 1) {
+                for (let j = 0; j < evolves2.length; j++) {
+                     let evo2 = "";
+                    evo2 = [evo.chain.species.name, evolves[i].species.name, evolves2[j].species.name]
+                    evoArr.push(evo2);
+                }
+            }
         }
-        console.log(evo.chain.evolves_to[0].evolves_to[0]);
-        // console.log(evo.chain.evolves_to[0].species);
+        console.log(evoArr);
+        // evoArr.forEach(mon => evolutionGenerator(mon));
+        for(let i =0; i<evoArr.length; i++){
+            for(let j =0; j<evoArr[i].length; j++){
+                await evolutionGenerator(evoArr[i][j]);
+            }
+            
+        }
+        
+    }
+    
+    
+}
+
+const evolutionGenerator = async (mon) =>{
+    const promise = await fetch("https://pokeapi.co/api/v2/pokemon/"+mon);
+    const data = await promise.json();
+
+    let img = document.createElement('img');
+    img.className = ("evoImg mx-auto");
+    img.src = data.sprites.other.showdown.front_default;
+    if(evoCount < 3){
+      evoDiv.append(img);
+      evoCount++;
+    }
+    else if(evoCount >= 3 && evoCount <6){
+        evoDiv2.append(img);
+        evoCount++;
+    }
+    else{
+        evoDiv3.append(img);
+        evoCount++;
     }
     
     
@@ -70,6 +128,5 @@ pkmnInput.addEventListener('keydown', async (event) => {
     //On enter I want this function to run
     if (event.key === "Enter") {
         pkmn = await mainApi(event.target.value);
-        console.log(pkmn.location_area_encounters);
     }
 })
