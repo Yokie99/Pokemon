@@ -73,18 +73,21 @@ const evoFetch = async (data) =>{
         let evoArr = [];
         
         let evolves = evo.chain.evolves_to;
-        for (let i = 1; i < evolves.length; i++) {
+        for (let i = 0; i < evolves.length; i++) {
             let evo1 = "";
             evo1 = [evo.chain.species.name, evolves[i].species.name];
-            // evoArr.push(evolves[i].species.name);
+            
             let evolves2 = evolves[i].evolves_to;
 
             if (evolves2.length >= 1) {
                 for (let j = 0; j < evolves2.length; j++) {
-                     let evo2 = "";
+                    let evo2 = "";
                     evo2 = [evo.chain.species.name, evolves[i].species.name, evolves2[j].species.name]
                     evoArr.push(evo2);
                 }
+            }
+            else{
+                evoArr.push(evo1);
             }
         }
         console.log(evoArr);
