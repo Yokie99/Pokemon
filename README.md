@@ -29,4 +29,5 @@ Review:
 
 
 Notes:
-Current logic for evolution uses the name of the pokemon to populate the div. Would need to change it to get the id instead because not all of the pokmeon can be searched using /pokemonName but can be accessed using /pokemonID. 
++ Current logic for evolution uses the name of the pokemon to populate the div. Would need to change it to get the id instead because not all of the pokmeon can be searched using /pokemonName but can be accessed using /pokemonID. 
++ input bar when website is in tablet in mobile only work if you hit enter, not the search button
