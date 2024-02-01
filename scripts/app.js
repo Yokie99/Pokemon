@@ -90,7 +90,7 @@ const speciesFetch = async (data) => {
         }
     }
 
-    console.log(species.flavor_text_entries.length);
+    // console.log(species.flavor_text_entries.length);
     evoFetch(species);
 }
 
@@ -98,12 +98,12 @@ const evoFetch = async (data) => {
     if (data.evolution_chain) {
         const promise = await fetch([data.evolution_chain.url]);
         const evo = await promise.json();
-        console.log(evo);
+        // console.log(evo);
 
         let evoArr = [];
 
         let evolves = evo.chain.evolves_to;
-        console.log(evolves);
+        // console.log(evolves);
         if (evolves.length === 0) {
             evoArr.push(evo.chain.species.name);
         }
@@ -127,7 +127,7 @@ const evoFetch = async (data) => {
             }
 
         }
-        console.log(evoArr);
+        // console.log(evoArr);
         // evoArr.forEach(mon => evolutionGenerator(mon));
         for (let i = 0; i < evoArr.length; i++) {
             let newDiv = document.createElement('div');
@@ -295,8 +295,6 @@ function resetFav() {
         favStar.src = "/assets/Clicked_Star.png";
     
         isFav = true;
-        console.log(isFav)
-
     }
     else {
         favStar.src = "/assets/Star_Vector.png"
