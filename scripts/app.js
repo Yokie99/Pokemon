@@ -8,31 +8,42 @@ let monMoves = document.getElementById("monMoves");
 let monImg = document.getElementById("monImg");
 
 let evoDiv = document.getElementById("evoDiv");
+
 let shinyBtn = document.getElementById("shinyBtn");
+let searchBtn = document.getElementById("searchBtn");
+let randomBtn = document.getElementById("randomBtn");
+let favBtn = document.getElementById("favBtn");
 
 
 
 let pkmnID = -99;
+let isShiny = false;
+
+
+function prettyWord (input){
+    return input.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+};
+
 const mainApi = async (mon) => {
     evoDiv.textContent = "";
     isShiny = false;
-    
-    
+
+
     const promise = await fetch("https://pokeapi.co/api/v2/pokemon/" + mon);
     const data = await promise.json();
 
-    monName.textContent = "#"+ data.id + " " + data.name;
+    monName.textContent = "#" + data.id + " " + prettyWord(data.name);
     pkmnID = data.id;
 
-    let types = data.types.map(ele => (ele.type.name));
+    let types = data.types.map(ele => prettyWord(ele.type.name));
     monType.textContent = types.join(', ');
 
     monDesc.textContent = "";
 
-    let abilities = data.abilities.map(ele => (ele.ability.name));
+    let abilities = data.abilities.map(ele => prettyWord(ele.ability.name));
     monAbilities.textContent = abilities.join(', ');
 
-    let moves = data.moves.map(ele => (ele.move.name));
+    let moves = data.moves.map(ele => prettyWord(ele.move.name));
     monMoves.textContent = moves.join(', ');
 
     monImg.src = data.sprites.other["official-artwork"].front_default;
@@ -45,97 +56,110 @@ const mainApi = async (mon) => {
     return data;
 }
 
-const locationFetch = async (data) =>{
+const locationFetch = async (data) => {
     const promise = await fetch([data.location_area_encounters]);
     const location = await promise.json();
-    monLocation.textContent =(location[0].location_area.name);
+    monLocation.textContent = prettyWord(location[0].location_area.name);
     return location;
-    
+
 }
 const speciesFetch = async (data) => {
     const promise = await fetch([data.species.url]);
     const species = await promise.json();
-    for(let i =0; i<species.flavor_text_entries.length; i++){
-        if (species.flavor_text_entries[i].language.name == "en"){
-            monDesc.textContent = species.flavor_text_entries[i].flavor_text;
+    for (let i = 0; i < species.flavor_text_entries.length; i++) {
+        if (species.flavor_text_entries[i].language.name == "en") {
+            monDesc.textContent = (species.flavor_text_entries[i].flavor_text).replace('\f', " ");
             break;
         }
     }
-    
+
     console.log(species.flavor_text_entries.length);
     evoFetch(species);
 }
 
-const evoFetch = async (data) =>{
-    if (data.evolution_chain){
+const evoFetch = async (data) => {
+    if (data.evolution_chain) {
         const promise = await fetch([data.evolution_chain.url]);
         const evo = await promise.json();
         console.log(evo);
 
         let evoArr = [];
-        
-        let evolves = evo.chain.evolves_to;
-        for (let i = 0; i < evolves.length; i++) {
-            let evo1 = "";
-            evo1 = [evo.chain.species.name, evolves[i].species.name];
-            
-            let evolves2 = evolves[i].evolves_to;
 
-            if (evolves2.length >= 1) {
-                for (let j = 0; j < evolves2.length; j++) {
-                    let evo2 = "";
-                    evo2 = [evo.chain.species.name, evolves[i].species.name, evolves2[j].species.name]
-                    evoArr.push(evo2);
+        let evolves = evo.chain.evolves_to;
+        console.log(evolves);
+        if (evolves.length === 0) {
+            evoArr.push(evo.chain.species.name);
+        }
+        else {
+            for (let i = 0; i < evolves.length; i++) {
+                let evo1 = "";
+                evo1 = [evo.chain.species.name, evolves[i].species.name];
+
+                let evolves2 = evolves[i].evolves_to;
+
+                if (evolves2.length >= 1) {
+                    for (let j = 0; j < evolves2.length; j++) {
+                        let evo2 = "";
+                        evo2 = [evo.chain.species.name, evolves[i].species.name, evolves2[j].species.name]
+                        evoArr.push(evo2);
+                    }
+                }
+                else {
+                    evoArr.push(evo1);
                 }
             }
-            else{
-                evoArr.push(evo1);
-            }
+
         }
         console.log(evoArr);
         // evoArr.forEach(mon => evolutionGenerator(mon));
-        for(let i =0; i<evoArr.length; i++){
+        for (let i = 0; i < evoArr.length; i++) {
             let newDiv = document.createElement('div');
             newDiv.className = ("flex justify-center items-end gap-[3vw] mt-6");
             newDiv.id = i;
             evoDiv.append(newDiv);
-           
 
-            for(let j =0; j<evoArr[i].length; j++){
-                await evolutionGenerator(evoArr[i][j], newDiv);
-                
+
+            if (evolves.length === 0) {
+                await evolutionGenerator(evoArr[i], newDiv);;
             }
-            
+            else {
+                for (let j = 0; j < evoArr[i].length; j++) {
+                    await evolutionGenerator(evoArr[i][j], newDiv);
+
+                }
+            }
+
+
         }
-        
+
     }
-    
-    
+
+
 }
 
 
-const evolutionGenerator = async (mon, newDiv) =>{
-    const promise = await fetch("https://pokeapi.co/api/v2/pokemon/"+mon);
+const evolutionGenerator = async (mon, newDiv) => {
+    const promise = await fetch("https://pokeapi.co/api/v2/pokemon/" + mon);
     const data = await promise.json();
 
     console.log(isShiny)
-    if(isShiny == false){
+    if (isShiny == false) {
         let img = document.createElement('img');
-    img.className = ("evoImg mx-auto");
-    img.src = data.sprites.other.showdown.front_default;
+        img.className = ("evoImg mx-auto");
+        img.src = data.sprites.other.showdown.front_default;
 
-    newDiv.append(img);
+        newDiv.append(img);
     }
-    else{
+    else {
         let img = document.createElement('img');
-    img.className = ("evoImg mx-auto");
-    img.src = data.sprites.other.showdown.front_shiny;
+        img.className = ("evoImg mx-auto");
+        img.src = data.sprites.other.showdown.front_shiny;
 
-    newDiv.append(img);
+        newDiv.append(img);
     }
-    
-    
-    
+
+
+
 }
 
 pkmnInput.addEventListener('keydown', async (event) => {
@@ -144,38 +168,43 @@ pkmnInput.addEventListener('keydown', async (event) => {
         pkmn = await mainApi(event.target.value);
     }
 })
+searchBtn.addEventListener('click', async () => {
+    mainApi(pkmnInput.value);
+})
+randomBtn.addEventListener('click', async () => {
+    var randomNumber = Math.floor(Math.random() * 1000) + 1;
+
+    mainApi(randomNumber);
+})
 
 
-let isShiny = false;
-shinyBtn.addEventListener('click', ()=>{
-    if(isShiny == false){
+shinyBtn.addEventListener('click', () => {
+    if (isShiny == false) {
         shiny();
-        // monImg.src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/" + pkmnID+ ".png";
         isShiny = true;
     }
-    else if(isShiny == true){
-        // monImg.src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" + pkmnID+ ".png";
+    else if (isShiny == true) {
         shiny();
         isShiny = false;
-        
+
     }
-    
+
 })
 
 const shiny = async () => {
     evoDiv.textContent = "";
-    
+
     console.log(pkmnID);
     const promise = await fetch("https://pokeapi.co/api/v2/pokemon/" + pkmnID);
     const data = await promise.json();
 
-    if(isShiny){
-         monImg.src = data.sprites.other["official-artwork"].front_shiny;
+    if (isShiny) {
+        monImg.src = data.sprites.other["official-artwork"].front_shiny;
     }
-    else{
+    else {
         monImg.src = data.sprites.other["official-artwork"].front_default;
     }
-   
+
 
     speciesFetch(data);
     return data;
