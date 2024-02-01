@@ -16,29 +16,29 @@
 
 <body class="bg-main bg-no-repeat bg-cover bg-center bg-fixed">
 
-    <h1 class="my-12 text-center text-8xl text-white textShadow"> PokéDex</h1>
+    <h1 class="my-12 text-center text-6xl lg:text-8xl text-white textShadow"> PokéDex</h1>
 
-    <div class="flex justify-center w-10/12 text-xl">
+    <div class="flex justify-center w-full text-xl">
 
-        <input id="pkmnInput" class="w-4/12 border-black border-4 text-center" type="text"
+        <input id="pkmnInput" class="w-4/12 border-black border-4 text-center hidden lg:block" type="text"
             placeholder="Pokemon name/number">
 
         <button id="searchBtn" type="button"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-16 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 mx-3">Search</button>
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-4 lg:px-16 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 mx-3 text-sm lg:text-lg">Search</button>
 
 
         <button id="randomBtn" type="button"
-            class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg  px-16 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800 mx-3">Random</button>
+            class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg  px-4 lg:px-16 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800 mx-3 text-sm lg:text-lg">Random</button>
 
         <button id="favBtn" type="button"
-            class="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg  px-16 py-2.5 text-center "
+            class="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg  px-4 lg:px-16 py-2.5 text-center text-sm lg:text-lg"
             data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example"
             data-drawer-placement="right" aria-controls="drawer-right-example">Favorites</button>
 
 
         <!-- drawer component -->
         <div id="drawer-right-example"
-            class="fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-white w-[25vw] dark:bg-gray-800"
+            class="fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-white w-screen lg:w-[25vw] dark:bg-gray-800"
             tabindex="-1" aria-labelledby="drawer-right-label">
             <h5 id="drawer-right-label"
                 class="inline-flex items-center mb-4 font-semibold text-4xl  text-black dark:text-gray-400">
@@ -59,18 +59,14 @@
 
             <div id="favList">
 
-            <div class="inline-flex items-center">
+            <!-- <div class="inline-flex items-center">
                 
-                <img class="w-20 h-20 mx-3" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/591.png" alt="">
-                <p>#591 Amoonguss</p>
-            
-            </div>
-            <div class="inline-flex items-center">
-                <img class="w-20 h-20 mx-3" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/51.png" alt="">
-                <p>#591 Amoonguss</p>
-            </div>
-            
-
+                    <img class="w-20 h-20 mx-3" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/591.png" alt="">
+                    <p>#591 Amoonguss</p>
+                
+                </div> -->
+                
+                
             </div>
             
 
@@ -88,23 +84,31 @@
 
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 mt-20">
+
+    <div class="flex justify-center lg:hidden ">
+        <input id="pkmnInput" class="w-8/12 my-8 border-black border-4 text-center" type="text"
+    placeholder="Pokemon name/number">
+    </div>
+    
+
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 lg:mt-20">
         <div class="">
 
             <div class="flex justify-center items-center">
 
-                <p id="monName" class="text-white text-5xl textShadow"></p>
+                <p id="monName" class="text-white text-4xl lg:text-5xl textShadow"></p>
 
                 <button id="shinyBtn" type="button"
-                    class="text-white bg-gradient-to-r from-yellow-200 via-orange-400 to-yellow-300 hover:bg-gradient-to-bl focus:ring-4 rounded-lg text-xl px-16 py-2.5 mx-3">Shiny</button>
+                    class="text-white bg-gradient-to-r from-yellow-200 via-orange-400 to-yellow-300 hover:bg-gradient-to-bl focus:ring-4 rounded-lg  px-4 lg:px-16 py-2.5 mx-3 text-sm lg:text-lg">Shiny</button>
                 <img id="favStar" class="" src="/assets/Star_Vector.png" alt="outline of a star">
             </div>
 
             <div class="flex justify-center items-center">
-                <img id="monImg" src="" alt="">
+                <img class="" id="monImg" src="" alt="">
             </div>
 
-            <p class="text-white text-5xl textShadow text-center">Evolutions</p>
+            <p class="text-white text-4xl lg:text-5xl textShadow text-center">Evolutions</p>
 
             <div id="evoDiv" class="overflow-y-scroll max-h-96">
 
@@ -138,27 +142,27 @@
         <div class="">
 
             <div class="flex w-full textShadow">
-                <p class=" w-[25%] text-3xl ">Type:</p>
-                <p id="monType" class=" w-[75%] text-3xl "></p>
+                <p class=" w-[25%] text-2xl lg:text-3xl ">Type:</p>
+                <p id="monType" class=" w-[75%] text-2xl lg:text-3xl "></p>
             </div>
             <div class="flex w-full textShadow my-10 ">
-                <p class=" w-[25%] text-3xl break-words">Description: </p>
-                <p id="monDesc" class=" w-[75%] text-3xl"></p>
+                <p class=" w-[25%] text-2xl lg:text-3xl break-words">Description: </p>
+                <p id="monDesc" class=" w-[75%] text-2xl lg:text-3xl"></p>
             </div>
             <div class="flex w-full textShadow my-10">
-                <p class=" w-[25%] text-3xl break-words
+                <p class=" w-[25%] text-2xl lg:text-3xl break-words
                     ">Location:</p>
-                <p id="monLocation" class=" w-[75%] text-3xl "></p>
+                <p id="monLocation" class=" w-[75%] text-2xl lg:text-3xl "></p>
             </div>
             <div class="flex w-full textShadow my-10">
-                <p class=" w-[25%] text-3xl break-words
+                <p class=" w-[25%] text-2xl lg:text-3xl break-words
                     ">Abilities:</p>
-                <p id="monAbilities" class=" w-[75%] text-3xl "></p>
+                <p id="monAbilities" class=" w-[75%] text-2xl lg:text-3xl "></p>
             </div>
             <div class="flex w-full textShadow my-10">
-                <p class=" w-[25%] text-3xl break-words 
+                <p class=" w-[25%] text-2xl lg:text-3xl break-words 
                     ">Moves:</p>
-                <p id="monMoves" class=" w-[75%] text-3xl overflow-y-scroll max-h-80"></p>
+                <p id="monMoves" class=" w-[75%] text-2xl lg:text-3xl overflow-y-scroll max-h-80"></p>
             </div>
 
 
