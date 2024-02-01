@@ -8,20 +8,21 @@ let monMoves = document.getElementById("monMoves");
 let monImg = document.getElementById("monImg");
 
 let evoDiv = document.getElementById("evoDiv");
-let evoDiv2 = document.getElementById("evoDiv2");
-let evoDiv3 = document.getElementById("evoDiv3");
-let evoCount = 0;
+let shinyBtn = document.getElementById("shinyBtn");
 
 
+
+let pkmnID = -99;
 const mainApi = async (mon) => {
     evoDiv.textContent = "";
-    evoDiv2.textContent = "";
-    evoDiv3.textContent = "";
-    evoCount = 0;
+    
+    
     const promise = await fetch("https://pokeapi.co/api/v2/pokemon/" + mon);
     const data = await promise.json();
 
     monName.textContent = "#"+ data.id + " " + data.name;
+    pkmnID = data.id;
+
     let types = data.types.map(ele => (ele.type.name));
     monType.textContent = types.join(', ');
 
@@ -93,8 +94,15 @@ const evoFetch = async (data) =>{
         console.log(evoArr);
         // evoArr.forEach(mon => evolutionGenerator(mon));
         for(let i =0; i<evoArr.length; i++){
+            let newDiv = document.createElement('div');
+            newDiv.className = ("flex justify-center items-end gap-[3vw] mt-6");
+            newDiv.id = i;
+            evoDiv.append(newDiv);
+           
+
             for(let j =0; j<evoArr[i].length; j++){
-                await evolutionGenerator(evoArr[i][j]);
+                await evolutionGenerator(evoArr[i][j], newDiv);
+                
             }
             
         }
@@ -104,25 +112,18 @@ const evoFetch = async (data) =>{
     
 }
 
-const evolutionGenerator = async (mon) =>{
+
+const evolutionGenerator = async (mon, newDiv) =>{
     const promise = await fetch("https://pokeapi.co/api/v2/pokemon/"+mon);
     const data = await promise.json();
+
+    
 
     let img = document.createElement('img');
     img.className = ("evoImg mx-auto");
     img.src = data.sprites.other.showdown.front_default;
-    if(evoCount < 3){
-      evoDiv.append(img);
-      evoCount++;
-    }
-    else if(evoCount >= 3 && evoCount <6){
-        evoDiv2.append(img);
-        evoCount++;
-    }
-    else{
-        evoDiv3.append(img);
-        evoCount++;
-    }
+
+    newDiv.append(img);
     
     
 }
@@ -132,4 +133,19 @@ pkmnInput.addEventListener('keydown', async (event) => {
     if (event.key === "Enter") {
         pkmn = await mainApi(event.target.value);
     }
+})
+
+
+let isShiny = false;
+shinyBtn.addEventListener('click', ()=>{
+    if(isShiny == false){
+        monImg.src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/" + pkmnID+ ".png";
+        isShiny = true;
+    }
+    else if(isShiny == true){
+        monImg.src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" + pkmnID+ ".png";
+        isShiny = false;
+        console.log("this should trigger")
+    }
+    
 })
