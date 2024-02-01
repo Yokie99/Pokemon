@@ -20,7 +20,8 @@
 
     <div class="flex justify-center w-10/12 text-xl">
 
-        <input id="pkmnInput" class="w-4/12 border-black border-4 text-center" type="text" placeholder="Pokemon name/number">
+        <input id="pkmnInput" class="w-4/12 border-black border-4 text-center" type="text"
+            placeholder="Pokemon name/number">
 
         <button id="searchBtn" type="button"
             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-16 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 mx-3">Search</button>
@@ -29,35 +30,55 @@
         <button id="randomBtn" type="button"
             class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg  px-16 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800 mx-3">Random</button>
 
-            <button id="favBtn" type="button" class="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg  px-16 py-2.5 text-center " data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example" data-drawer-placement="right" aria-controls="drawer-right-example">Favorite</button>
-
- 
- <!-- drawer component -->
- <div id="drawer-right-example" class="fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-white w-[25vw] dark:bg-gray-800" tabindex="-1" aria-labelledby="drawer-right-label">
-     <h5 id="drawer-right-label" class="inline-flex items-center mb-4 font-semibold text-4xl  text-black dark:text-gray-400"> 
-
-     <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-   </svg>Favorites</h5>
-    <button type="button" data-drawer-hide="drawer-right-example" aria-controls="drawer-right-example" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white" >
-       <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-       </svg>
-       <span class="sr-only">Close menu</span>
-    </button>
-    
-
-<h1>hi im a placeholder 1</h1>
-<h1>hi im a placeholder 2</h1>
-<h1>hi im a placeholder 3</h1>
-<h1>hi im a placeholder 4</h1>
-
-    
- </div>
-
- 
+        <button id="favBtn" type="button"
+            class="text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 font-medium rounded-lg  px-16 py-2.5 text-center "
+            data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example"
+            data-drawer-placement="right" aria-controls="drawer-right-example">Favorite</button>
 
 
- 
+        <!-- drawer component -->
+        <div id="drawer-right-example"
+            class="fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-white w-[25vw] dark:bg-gray-800"
+            tabindex="-1" aria-labelledby="drawer-right-label">
+            <h5 id="drawer-right-label"
+                class="inline-flex items-center mb-4 font-semibold text-4xl  text-black dark:text-gray-400">
+
+                <path
+                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                </svg>Favorites
+            </h5>
+            <button type="button" data-drawer-hide="drawer-right-example" aria-controls="drawer-right-example"
+                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
+                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                </svg>
+                <span class="sr-only">Close menu</span>
+            </button>
+
+            <div id="favList">
+
+            <div class="inline-flex items-center">
+                <img class="w-20 h-20 mx-3" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/591.png" alt="">
+                <p>#591 Amoonguss</p>
+            </div>
+            <div class="inline-flex items-center">
+                <img class="w-20 h-20 mx-3" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/51.png" alt="">
+                <p>#591 Amoonguss</p>
+            </div>
+            
+
+            </div>
+            
+
+
+        </div>
+
+
+
+
+
 
 
 
@@ -70,80 +91,80 @@
 
             <div class="flex justify-center items-center">
 
-                <p id="monName" class="text-white text-5xl textShadow">#1 Bulbasaur</p>
+                <p id="monName" class="text-white text-5xl textShadow"></p>
 
                 <button id="shinyBtn" type="button"
                     class="text-white bg-gradient-to-r from-yellow-200 via-orange-400 to-yellow-300 hover:bg-gradient-to-bl focus:ring-4 rounded-lg text-xl px-16 py-2.5 mx-3">Shiny</button>
-                <img src="/assets/Star_Vector.png" alt="">
+                <img id="favStar" class="" src="/assets/Star_Vector.png" alt="outline of a star">
             </div>
 
             <div class="flex justify-center items-center">
-                <img id="monImg" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
-                    alt="">
+                <img id="monImg" src="" alt="">
             </div>
 
             <p class="text-white text-5xl textShadow text-center">Evolutions</p>
 
             <div id="evoDiv" class="">
-            
-                <div class="flex justify-center items-center gap-[3vw] mt-6">
+
+                <!-- <div class="flex justify-center items-center gap-[3vw] mt-6">
                     <div>
-                         <img class="evoImg mx-auto" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/479.gif" alt="">
-                    <p class="text-center">Rotom</p>
+                        <img class="evoImg mx-auto"
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/479.gif"
+                            alt="">
+                        <p class="text-center">Rotom</p>
                     </div>
-                   <p class="items-center text-6xl"> &rarr; </p>
+                    <p class="items-center text-6xl"> &rarr; </p>
 
-                   <div>
-                    <img class="evoImg mx-auto" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/479.gif" alt="">
-               <p class="text-center">Rotom</p>
-               </div>
-              
+                    <div>
+                        <img class="evoImg mx-auto"
+                            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/479.gif"
+                            alt="">
+                        <p class="text-center">Rotom</p>
+                    </div> 
 
 
-                </div>
-                
 
-                
+                 </div> -->
+
+
+
             </div>
-           
+
 
 
         </div>
         <div class="">
-        
-                <div class="flex w-full textShadow">
-                    <p class=" w-[25%] text-3xl ">Type:</p>
-                    <p id="monType" class=" w-[75%] text-3xl ">Grass, Poison</p>
-                </div>
-                <div class="flex w-full textShadow my-10 ">
-                    <p class=" w-[25%] text-3xl break-words">Description: </p>
-                    <p id="monDesc" class=" w-[75%] text-3xl">A strange seed was planted on its back at birth. The plant sprouts and grows with this POKeMON</p>
-                </div>
-                <div class="flex w-full textShadow my-10">
-                    <p class=" w-[25%] text-3xl break-words
+
+            <div class="flex w-full textShadow">
+                <p class=" w-[25%] text-3xl ">Type:</p>
+                <p id="monType" class=" w-[75%] text-3xl "></p>
+            </div>
+            <div class="flex w-full textShadow my-10 ">
+                <p class=" w-[25%] text-3xl break-words">Description: </p>
+                <p id="monDesc" class=" w-[75%] text-3xl"></p>
+            </div>
+            <div class="flex w-full textShadow my-10">
+                <p class=" w-[25%] text-3xl break-words
                     ">Location:</p>
-                    <p id="monLocation" class=" w-[75%] text-3xl ">Pallet Town</p>
-                </div>
-                <div class="flex w-full textShadow my-10">
-                    <p class=" w-[25%] text-3xl break-words
+                <p id="monLocation" class=" w-[75%] text-3xl "></p>
+            </div>
+            <div class="flex w-full textShadow my-10">
+                <p class=" w-[25%] text-3xl break-words
                     ">Abilities:</p>
-                    <p id="monAbilities" class=" w-[75%] text-3xl ">Overgrowth, Chlorophyll</p>
-                </div>
-                <div class="flex w-full textShadow my-10">
-                    <p class=" w-[25%] text-3xl break-words
+                <p id="monAbilities" class=" w-[75%] text-3xl "></p>
+            </div>
+            <div class="flex w-full textShadow my-10">
+                <p class=" w-[25%] text-3xl break-words
                     ">Moves:</p>
-                    <p id="monMoves" class=" w-[75%] text-3xl ">Razor Wind, Swords Dance, Cut, Bind, Vine Whip, Headbutt,
-                        Tackle, Body Slam, Take Down, Double Edge, Growl, Strength, Mega-Drain, Leech Seed, Growth,
-                        Razor Leaf, Solar Beam, Poison Powder, Sleep Powder, Petal Dance, String Shot, Toxic, Rage,
-                        Mimic Double Team, Defense Curl, Light Screen</p>
-                </div>
+                <p id="monMoves" class=" w-[75%] text-3xl "></p>
+            </div>
 
-            
-            
 
-        
 
-    </div>
+
+
+
+        </div>
 
 
 
@@ -151,8 +172,8 @@
 
 
 
-    <script src="/scripts/app.js"></script>
-    <script src="/node_modules/flowbite/dist/flowbite.min.js"></script>
+        <script type="module" src="/scripts/app.js"></script>
+        <script src="/node_modules/flowbite/dist/flowbite.min.js"></script>
 </body>
 
 </html>

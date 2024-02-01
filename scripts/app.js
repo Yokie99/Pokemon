@@ -1,3 +1,6 @@
+import { saveToLocalStorage, getlocalStorage, removeFromLocalStorage, isObjectInFavorites } from "./localstorage.js";
+
+//text in html
 let pkmnInput = document.getElementById("pkmnInput");
 let monName = document.getElementById("monName");
 let monType = document.getElementById("monType");
@@ -7,24 +10,33 @@ let monAbilities = document.getElementById("monAbilities");
 let monMoves = document.getElementById("monMoves");
 let monImg = document.getElementById("monImg");
 
-let evoDiv = document.getElementById("evoDiv");
 
+//btn in HTML
 let shinyBtn = document.getElementById("shinyBtn");
 let searchBtn = document.getElementById("searchBtn");
 let randomBtn = document.getElementById("randomBtn");
 let favBtn = document.getElementById("favBtn");
+let favStar = document.getElementById("favStar");
 
+//divs to target in html
+let evoDiv = document.getElementById("evoDiv");
+let favList = document.getElementById("favList")
 
-
+let pkmn = "";
 let pkmnID = -99;
 let isShiny = false;
-
+let isFav = false;
+let saveArr = {};
+        
 
 function prettyWord(input) {
     return input.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 };
 
 const mainApi = async (mon) => {
+
+
+
     evoDiv.textContent = "";
     isShiny = false;
 
@@ -33,8 +45,11 @@ const mainApi = async (mon) => {
     const data = await promise.json();
 
     monName.textContent = "#" + data.id + " " + prettyWord(data.name);
+    pkmn = data.name;
     pkmnID = data.id;
-
+    saveArr.name = pkmn;
+    saveArr.id = pkmnID;
+    resetFav();
     let types = data.types.map(ele => prettyWord(ele.type.name));
     monType.textContent = types.join(', ');
 
@@ -55,6 +70,8 @@ const mainApi = async (mon) => {
     speciesFetch(data);
     return data;
 }
+
+mainApi(591);
 
 const locationFetch = async (data) => {
     const promise = await fetch([data.location_area_encounters]);
@@ -128,10 +145,10 @@ const evoFetch = async (data) => {
                     const pElementArrow = document.createElement('p');
                     pElementArrow.classList.add('text-6xl');
                     pElementArrow.textContent = '→';
-                    if(j < evoArr[i].length-1){
+                    if (j < evoArr[i].length - 1) {
                         newDiv.append(pElementArrow);
                     }
-                    
+
                 }
             }
 
@@ -148,7 +165,7 @@ const evolutionGenerator = async (mon, newDiv) => {
     const promise = await fetch("https://pokeapi.co/api/v2/pokemon/" + mon);
     const data = await promise.json();
 
-    console.log(isShiny)
+    // console.log(isShiny)
     if (isShiny == false) {
 
         let div = document.createElement('div');
@@ -157,7 +174,7 @@ const evolutionGenerator = async (mon, newDiv) => {
         img.className = ("evoImg mx-auto");
         img.src = data.sprites.other.showdown.front_default;
 
-        buttonElement.addEventListener('click', function() {
+        buttonElement.addEventListener('click', function () {
             mainApi(mon);
         });
 
@@ -168,9 +185,9 @@ const evolutionGenerator = async (mon, newDiv) => {
         buttonElement.appendChild(img);
         buttonElement.appendChild(pInside);
         div.appendChild(buttonElement);
-        
+
         newDiv.append(div);
-        
+
     }
     else {
         let div = document.createElement('div');
@@ -179,7 +196,7 @@ const evolutionGenerator = async (mon, newDiv) => {
         img.className = ("evoImg mx-auto");
         img.src = data.sprites.other.showdown.front_shiny;
 
-        buttonElement.addEventListener('click', function() {
+        buttonElement.addEventListener('click', function () {
             mainApi(mon);
         });
 
@@ -190,8 +207,8 @@ const evolutionGenerator = async (mon, newDiv) => {
         buttonElement.appendChild(img);
         buttonElement.appendChild(pInside);
         div.appendChild(buttonElement);
-        
-        
+
+
         newDiv.append(div);
     }
 
@@ -199,10 +216,30 @@ const evolutionGenerator = async (mon, newDiv) => {
 
 }
 
+const shiny = async () => {
+    evoDiv.textContent = "";
+
+    console.log(pkmnID);
+    const promise = await fetch("https://pokeapi.co/api/v2/pokemon/" + pkmnID);
+    const data = await promise.json();
+
+    if (isShiny) {
+        monImg.src = data.sprites.other["official-artwork"].front_shiny;
+    }
+    else {
+        monImg.src = data.sprites.other["official-artwork"].front_default;
+    }
+
+
+    speciesFetch(data);
+    return data;
+}
+
+
 pkmnInput.addEventListener('keydown', async (event) => {
     //On enter I want this function to run
     if (event.key === "Enter") {
-        pkmn = await mainApi(event.target.value);
+        await mainApi(event.target.value);
     }
 })
 searchBtn.addEventListener('click', async () => {
@@ -228,22 +265,43 @@ shinyBtn.addEventListener('click', () => {
 
 })
 
-const shiny = async () => {
-    evoDiv.textContent = "";
+favStar.addEventListener('click', () => {
+    if (isFav) {
+        favStar.src = "/assets/Star_Vector.png"
+        isFav = false;
 
-    console.log(pkmnID);
-    const promise = await fetch("https://pokeapi.co/api/v2/pokemon/" + pkmnID);
-    const data = await promise.json();
+        removeFromLocalStorage(saveArr);
 
-    if (isShiny) {
-        monImg.src = data.sprites.other["official-artwork"].front_shiny;
+
     }
     else {
-        monImg.src = data.sprites.other["official-artwork"].front_default;
+        favStar.src = "/assets/Clicked_Star.png";
+        
+        saveToLocalStorage(saveArr);
+        isFav = true;
     }
 
+})
 
-    speciesFetch(data);
-    return data;
+favBtn.addEventListener('click', () =>{
+ console.log(pkmn);
+
+})
+
+function resetFav() {
+    let favorites = getlocalStorage();
+    
+    if (isObjectInFavorites(saveArr, favorites)) {
+        favStar.src = "/assets/Clicked_Star.png";
+        isFav = true;
+        console.log(isFav)
+
+    }
+    else {
+        favStar.src = "/assets/Star_Vector.png"
+        isFav = false;
+        
+
+    }
+
 }
-
