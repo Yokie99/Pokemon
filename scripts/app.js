@@ -2,6 +2,7 @@ import { saveToLocalStorage, getlocalStorage, removeFromLocalStorage, isObjectIn
 
 //text in html
 let pkmnInput = document.getElementById("pkmnInput");
+let pkmnInput2 = document.getElementById("pkmnInput2");
 let monName = document.getElementById("monName");
 let monType = document.getElementById("monType");
 let monDesc = document.getElementById("monDesc");
@@ -237,6 +238,12 @@ const shiny = async () => {
 
 
 pkmnInput.addEventListener('keydown', async (event) => {
+    //On enter I want this function to run
+    if (event.key === "Enter") {
+        await mainApi(event.target.value);
+    }
+})
+pkmnInput2.addEventListener('keydown', async (event) => {
     //On enter I want this function to run
     if (event.key === "Enter") {
         await mainApi(event.target.value);
