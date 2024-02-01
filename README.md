@@ -23,8 +23,8 @@ Fully Responsive using Tailwind CSS https://tailwindcss.com
 Have a Prototype in Figma (Desktop, Tablet, Mobile) 
 
 
-Peer Reviewer: 
-Review: 
+Peer Reviewer: Jared Ly
+Review: The site looks great and there are not many issues with it, code is also very well written. When you click the favorites btn it seems to have two undefined pokemon but other than that it works fine. I love how the evolutions look like
 
 
 
