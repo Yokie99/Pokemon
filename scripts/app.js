@@ -27,7 +27,7 @@ let pkmnID = -99;
 let isShiny = false;
 let isFav = false;
 let saveArr = {};
-        
+
 
 function prettyWord(input) {
     return input.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
@@ -283,16 +283,17 @@ favStar.addEventListener('click', () => {
 
 })
 
-favBtn.addEventListener('click', () =>{
- console.log(pkmn);
+favBtn.addEventListener('click', () => {
+    createFav();
 
 })
 
 function resetFav() {
     let favorites = getlocalStorage();
-    
+
     if (isObjectInFavorites(saveArr, favorites)) {
         favStar.src = "/assets/Clicked_Star.png";
+    
         isFav = true;
         console.log(isFav)
 
@@ -300,8 +301,46 @@ function resetFav() {
     else {
         favStar.src = "/assets/Star_Vector.png"
         isFav = false;
-        
+
 
     }
 
+}
+
+function createFav() {
+    let favorites = getlocalStorage();
+    favList.textContent = "";
+    
+    const pkmnArray = Object.values(favorites);
+    console.log(pkmnArray);
+    pkmnArray.map(mon => {
+
+    let buttonElement = document.createElement('button');
+    buttonElement.addEventListener('click', function () {
+        mainApi(mon.id);
+
+    });
+    let div = document.createElement('div');
+    div.className = ("inline-flex items-center");
+
+    let img = document.createElement('img');
+    img.className = ("w-20 h-20 mx-3");
+    img.src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" + mon.id + ".png";
+
+
+
+    const pInside = document.createElement('p');
+    pInside.textContent = prettyWord("#" + mon.id + " " + mon.name);
+
+    div.appendChild(img);
+    div.appendChild(pInside);
+    buttonElement.appendChild(div);
+
+    favList.append(buttonElement);
+
+
+    })
+
+
+    
 }
