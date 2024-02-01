@@ -15,6 +15,7 @@ let shinyBtn = document.getElementById("shinyBtn");
 let pkmnID = -99;
 const mainApi = async (mon) => {
     evoDiv.textContent = "";
+    isShiny = false;
     
     
     const promise = await fetch("https://pokeapi.co/api/v2/pokemon/" + mon);
@@ -117,13 +118,22 @@ const evolutionGenerator = async (mon, newDiv) =>{
     const promise = await fetch("https://pokeapi.co/api/v2/pokemon/"+mon);
     const data = await promise.json();
 
-    
-
-    let img = document.createElement('img');
+    console.log(isShiny)
+    if(isShiny == false){
+        let img = document.createElement('img');
     img.className = ("evoImg mx-auto");
     img.src = data.sprites.other.showdown.front_default;
 
     newDiv.append(img);
+    }
+    else{
+        let img = document.createElement('img');
+    img.className = ("evoImg mx-auto");
+    img.src = data.sprites.other.showdown.front_shiny;
+
+    newDiv.append(img);
+    }
+    
     
     
 }
@@ -139,13 +149,35 @@ pkmnInput.addEventListener('keydown', async (event) => {
 let isShiny = false;
 shinyBtn.addEventListener('click', ()=>{
     if(isShiny == false){
-        monImg.src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/" + pkmnID+ ".png";
+        shiny();
+        // monImg.src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/" + pkmnID+ ".png";
         isShiny = true;
     }
     else if(isShiny == true){
-        monImg.src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" + pkmnID+ ".png";
+        // monImg.src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" + pkmnID+ ".png";
+        shiny();
         isShiny = false;
-        console.log("this should trigger")
+        
     }
     
 })
+
+const shiny = async () => {
+    evoDiv.textContent = "";
+    
+    console.log(pkmnID);
+    const promise = await fetch("https://pokeapi.co/api/v2/pokemon/" + pkmnID);
+    const data = await promise.json();
+
+    if(isShiny){
+         monImg.src = data.sprites.other["official-artwork"].front_shiny;
+    }
+    else{
+        monImg.src = data.sprites.other["official-artwork"].front_default;
+    }
+   
+
+    speciesFetch(data);
+    return data;
+}
+
