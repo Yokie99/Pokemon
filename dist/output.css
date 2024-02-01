@@ -1245,6 +1245,39 @@ input:checked + .toggle-bg {
   height: 5rem;
 }
 
+.max-h-80 {
+  max-height: 20rem;
+}
+
+.max-h-px {
+  max-height: 1px;
+}
+
+.max-h-9 {
+  max-height: 2.25rem;
+}
+
+.max-h-96 {
+  max-height: 24rem;
+}
+
+.max-h-3 {
+  max-height: 0.75rem;
+}
+
+.max-h-3\.5 {
+  max-height: 0.875rem;
+}
+
+.max-h-max {
+  max-height: -moz-max-content;
+  max-height: max-content;
+}
+
+.max-h-full {
+  max-height: 100%;
+}
+
 .w-1\/2 {
   width: 50%;
 }
@@ -1411,6 +1444,10 @@ input:checked + .toggle-bg {
 
 .overflow-y-auto {
   overflow-y: auto;
+}
+
+.overflow-y-scroll {
+  overflow-y: scroll;
 }
 
 .break-words {
