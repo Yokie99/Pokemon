@@ -20,7 +20,7 @@ let pkmnID = -99;
 let isShiny = false;
 
 
-function prettyWord (input){
+function prettyWord(input) {
     return input.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 };
 
@@ -114,7 +114,7 @@ const evoFetch = async (data) => {
         // evoArr.forEach(mon => evolutionGenerator(mon));
         for (let i = 0; i < evoArr.length; i++) {
             let newDiv = document.createElement('div');
-            newDiv.className = ("flex justify-center items-end gap-[3vw] mt-6");
+            newDiv.className = ("flex justify-center items-center gap-[3vw] mt-6");
             newDiv.id = i;
             evoDiv.append(newDiv);
 
@@ -125,7 +125,13 @@ const evoFetch = async (data) => {
             else {
                 for (let j = 0; j < evoArr[i].length; j++) {
                     await evolutionGenerator(evoArr[i][j], newDiv);
-
+                    const pElementArrow = document.createElement('p');
+                    pElementArrow.classList.add('text-6xl');
+                    pElementArrow.textContent = '→';
+                    if(j < evoArr[i].length-1){
+                        newDiv.append(pElementArrow);
+                    }
+                    
                 }
             }
 
@@ -144,18 +150,49 @@ const evolutionGenerator = async (mon, newDiv) => {
 
     console.log(isShiny)
     if (isShiny == false) {
+
+        let div = document.createElement('div');
+        let buttonElement = document.createElement('button');
         let img = document.createElement('img');
         img.className = ("evoImg mx-auto");
         img.src = data.sprites.other.showdown.front_default;
 
-        newDiv.append(img);
+        buttonElement.addEventListener('click', function() {
+            mainApi(mon);
+        });
+
+        const pInside = document.createElement('p');
+        pInside.classList.add('text-center');
+        pInside.textContent = prettyWord(mon);
+
+        buttonElement.appendChild(img);
+        buttonElement.appendChild(pInside);
+        div.appendChild(buttonElement);
+        
+        newDiv.append(div);
+        
     }
     else {
+        let div = document.createElement('div');
+        let buttonElement = document.createElement('button');
         let img = document.createElement('img');
         img.className = ("evoImg mx-auto");
         img.src = data.sprites.other.showdown.front_shiny;
 
-        newDiv.append(img);
+        buttonElement.addEventListener('click', function() {
+            mainApi(mon);
+        });
+
+        const pInside = document.createElement('p');
+        pInside.classList.add('text-center');
+        pInside.textContent = prettyWord(mon);
+
+        buttonElement.appendChild(img);
+        buttonElement.appendChild(pInside);
+        div.appendChild(buttonElement);
+        
+        
+        newDiv.append(div);
     }
 
 
